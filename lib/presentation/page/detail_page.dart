@@ -19,7 +19,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   DetailBloc _detailBloc;
-
+  double _viewportFraction = 0.8;
   double _marginCard = 10;
   PageController _pageController;
   @override
@@ -28,7 +28,7 @@ class _DetailPageState extends State<DetailPage> {
     _detailBloc.pushPageIndex(widget._currentPage);
     _pageController = PageController(
       initialPage: widget._currentPage,
-      viewportFraction: 0.8,
+      viewportFraction: _viewportFraction,
     );
     _pageController.addListener(_pageListener);
     super.initState();
@@ -65,57 +65,21 @@ class _DetailPageState extends State<DetailPage> {
               builder: (context, snapshot) {
                 List<UserEntity> list = widget._bloc.getCachedUsers;
                 return Scaffold(
-                  appBar: AppBar(
-                    actions: <Widget>[
-                      IconButton(
-                        padding: EdgeInsets.symmetric(horizontal: _marginCard),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.close),
-                      )
-                    ],
-                    automaticallyImplyLeading: false,
-                    backgroundColor: Colors.transparent,
-                    title: StreamBuilder<int>(
-                        stream: _detailBloc.getCurrentPage,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData)
-                            return Text(
-                                '${snapshot.data + 1} из ${list.length}');
-                          else {
-                            return Container();
-                          }
-                        }),
-                    centerTitle: true,
-                  ),
+                  appBar: _buildAppBar(list.length),
                   backgroundColor: Colors.transparent,
                   body: Center(
                       child: Container(
-                        child: PageView.builder(
-                    onPageChanged: (index) => _detailBloc.pushPageIndex(index),
-                    controller: _pageController,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: list.length + 1,
-                    itemBuilder: (context, i) {
-                        if (i == list.length) {
-                          if (snapshot.hasError) {
-                            return Card(
-                              margin: EdgeInsets.symmetric(horizontal: _marginCard),
-                              child: ErrorColumnWidget(
-                                  () => widget._bloc.fetchUsers()),
-                            );
-                          }
-                          return Card(
-                              margin: EdgeInsets.symmetric(horizontal: _marginCard),
-                              child: LoadingWidget());
-                        } else {
-                          UserEntity user = list[i];
-                          return _buildTile(user);
-                        }
-                    },
-                  ),
-                      )),
+                    child: PageView.builder(
+                      onPageChanged: (index) =>
+                          _detailBloc.pushPageIndex(index),
+                      controller: _pageController,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: list.length + 1,
+                      itemBuilder: (context, i) {
+                        return _buildCard(list, i, snapshot.hasError);
+                      },
+                    ),
+                  )),
                 );
               }),
         ),
@@ -123,38 +87,81 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  _buildTile(UserEntity user) {
+  _buildCard(List<UserEntity> list, int index, bool hasError) {
     return Card(
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.symmetric(horizontal: _marginCard),
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: Image.network(
-              user.getLargePicture,
-              fit: BoxFit.cover,
-            ),
-          ),
-          ListTile(
-            title: Text(
-              user.getFullName,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-          ),
-          ListTile(
-            title: Text('Address:'),
-            subtitle: Text(user.getFullAddress),
-          ),
-          ListTile(
-            title: Text('Email:'),
-            subtitle: Text(user.getEmail),
-          ),
-          ListTile(
-            title: Text('Phone:'),
-            subtitle: Text(user.getPhone),
-          )
-        ],
+      child: Builder(
+        builder: (context) {
+          if (index == list.length) {
+            if (hasError) {
+              return ErrorColumnWidget(() => widget._bloc.fetchUsers());
+            }
+            return LoadingWidget();
+          } else {
+            UserEntity user = list[index];
+            return _buildTile(user);
+          }
+        },
       ),
+    );
+  }
+
+  _buildTile(UserEntity user) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: Image.network(
+            user.getLargePicture,
+            fit: BoxFit.cover,
+          ),
+        ),
+        ListTile(
+          title: Text(
+            user.getFullName,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          ),
+        ),
+        ListTile(
+          title: Text('Address:'),
+          subtitle: Text(user.getFullAddress),
+        ),
+        ListTile(
+          title: Text('Email:'),
+          subtitle: Text(user.getEmail),
+        ),
+        ListTile(
+          title: Text('Phone:'),
+          subtitle: Text(user.getPhone),
+        )
+      ],
+    );
+  }
+
+  _buildAppBar(int totalSize) {
+    return AppBar(
+      actions: <Widget>[
+        IconButton(
+          padding: EdgeInsets.symmetric(horizontal: _marginCard*5),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.close),
+        )
+      ],
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.transparent,
+      title: StreamBuilder<int>(
+          stream: _detailBloc.getCurrentPage,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              int pageNumber = snapshot.data;
+              return Text('${pageNumber + 1} из ${totalSize}');
+            } else {
+              return Container();
+            }
+          }),
+      centerTitle: true,
     );
   }
 }

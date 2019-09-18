@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, i) {
                   if (i == list.length) {
                     if (snapshot.hasError) {
-                      return ErrorColumnWidget(()=>_bloc.fetchUsers());
+                      return ErrorColumnWidget(() => _bloc.fetchUsers());
                     }
                     return LoadingWidget();
                   } else {
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
               );
             }
             if (snapshot.hasError) {
-              return ErrorColumnWidget(()=>_bloc.fetchUsers());
+              return ErrorColumnWidget(() => _bloc.fetchUsers());
             }
             return LoadingWidget();
           },
@@ -91,18 +91,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  
-
   _buildTile(UserEntity user, int index) {
     return ListTile(
       onTap: () {
-        Navigator.push(context, TransparentPageRoute(builder: (BuildContext context) => DetailPage(_bloc,index)));
+        Navigator.push(
+            context,
+            TransparentPageRoute(
+                builder: (BuildContext context) => DetailPage(_bloc, index)));
       },
       leading: Image.network(user.getSmallPicture),
       title: Text(user.getFullName),
       subtitle: Text(user.getFullAddress),
     );
   }
-
-
 }
