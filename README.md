@@ -1,9 +1,6 @@
 # Flutter v1.8.4
 
-Унаследовался от MaterialPageRoute (класс TransparentPageRoute в папке util), переопределил opaque, который был true(теперь будет false), чтобы включить прозрачность на Detail Page.
-<img src="screens/mpe.png" width="1000" height="70">
-Чтобы не было exception, закомментировал в оригинальном файле  фреймворка с классом MaterialPageRoute строку assert(opaque)
-<img src="screens/mpf.png" width="1000" height="300">
+<img src="screens/gif.gif" width="285" height="570">
 
 <img src="screens/1scr.png" width="285" height="570"> <img src="screens/2scr.png" width="285" height="570"> <img src="screens/3scr.png" width="285" height="570">
 
