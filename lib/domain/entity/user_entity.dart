@@ -1,4 +1,4 @@
-import 'package:itgro_test/util/string_util.dart' as helper;
+import 'package:test_task_flutter/util/string_util.dart' as helper;
 
 class UserEntity {
   String _firstName;

@@ -1,7 +1,7 @@
-import 'package:itgro_test/data/datasource/remote_datasource.dart';
-import 'package:itgro_test/data/mapper/user_mapper.dart';
-import 'package:itgro_test/domain/entity/user_entity.dart';
-import 'package:itgro_test/domain/repository/user_repository.dart';
+import 'package:test_task_flutter/data/datasource/remote_datasource.dart';
+import 'package:test_task_flutter/data/mapper/user_mapper.dart';
+import 'package:test_task_flutter/domain/entity/user_entity.dart';
+import 'package:test_task_flutter/domain/repository/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
   RemoteDatasource _remoteDatasource;

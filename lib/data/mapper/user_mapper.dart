@@ -1,5 +1,5 @@
-import 'package:itgro_test/data/models/user_model.dart';
-import 'package:itgro_test/domain/entity/user_entity.dart';
+import 'package:test_task_flutter/data/models/user_model.dart';
+import 'package:test_task_flutter/domain/entity/user_entity.dart';
 
 class UserMapper {
   UserEntity mapModelToEntity(UserModel userModel) {

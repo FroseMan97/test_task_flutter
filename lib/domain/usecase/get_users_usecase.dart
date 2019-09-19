@@ -1,5 +1,5 @@
-import 'package:itgro_test/domain/entity/user_entity.dart';
-import 'package:itgro_test/domain/repository/user_repository.dart';
+import 'package:test_task_flutter/domain/entity/user_entity.dart';
+import 'package:test_task_flutter/domain/repository/user_repository.dart';
 
 class GetUsersUsecase {
   UserRepository _userRepository;

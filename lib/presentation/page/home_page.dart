@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:itgro_test/data/datasource/impl/remote_datasource_impl.dart';
-import 'package:itgro_test/data/datasource/remote_datasource.dart';
-import 'package:itgro_test/data/mapper/user_mapper.dart';
-import 'package:itgro_test/data/repository/user_repository_impl.dart';
-import 'package:itgro_test/domain/entity/user_entity.dart';
-import 'package:itgro_test/domain/repository/user_repository.dart';
-import 'package:itgro_test/domain/usecase/get_users_usecase.dart';
-import 'package:itgro_test/presentation/bloc/bloc.dart';
-import 'package:itgro_test/presentation/page/detail_page.dart';
-import 'package:itgro_test/presentation/widget/error_widget.dart';
-import 'package:itgro_test/presentation/widget/loading_widget.dart';
-import 'package:itgro_test/util/transparent_route.dart';
+import 'package:test_task_flutter/data/datasource/impl/remote_datasource_impl.dart';
+import 'package:test_task_flutter/data/datasource/remote_datasource.dart';
+import 'package:test_task_flutter/data/mapper/user_mapper.dart';
+import 'package:test_task_flutter/data/repository/user_repository_impl.dart';
+import 'package:test_task_flutter/domain/entity/user_entity.dart';
+import 'package:test_task_flutter/domain/repository/user_repository.dart';
+import 'package:test_task_flutter/domain/usecase/get_users_usecase.dart';
+import 'package:test_task_flutter/presentation/bloc/bloc.dart';
+import 'package:test_task_flutter/presentation/page/detail_page.dart';
+import 'package:test_task_flutter/presentation/widget/error_widget.dart';
+import 'package:test_task_flutter/presentation/widget/loading_widget.dart';
+import 'package:test_task_flutter/util/transparent_route.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);

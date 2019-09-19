@@ -1,4 +1,4 @@
-import 'package:itgro_test/domain/entity/user_entity.dart';
+import 'package:test_task_flutter/domain/entity/user_entity.dart';
 
 abstract class UserRepository {
   Future<List<UserEntity>> getUsers(int quantity);

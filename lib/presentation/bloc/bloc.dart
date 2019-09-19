@@ -1,5 +1,5 @@
-import 'package:itgro_test/domain/entity/user_entity.dart';
-import 'package:itgro_test/domain/usecase/get_users_usecase.dart';
+import 'package:test_task_flutter/domain/entity/user_entity.dart';
+import 'package:test_task_flutter/domain/usecase/get_users_usecase.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Bloc {

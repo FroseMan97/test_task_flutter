@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:itgro_test/domain/entity/user_entity.dart';
-import 'package:itgro_test/presentation/bloc/bloc.dart';
-import 'package:itgro_test/presentation/bloc/detail_bloc.dart';
-import 'package:itgro_test/presentation/widget/error_widget.dart';
-import 'package:itgro_test/presentation/widget/loading_widget.dart';
+import 'package:test_task_flutter/domain/entity/user_entity.dart';
+import 'package:test_task_flutter/presentation/bloc/bloc.dart';
+import 'package:test_task_flutter/presentation/bloc/detail_bloc.dart';
+import 'package:test_task_flutter/presentation/widget/error_widget.dart';
+import 'package:test_task_flutter/presentation/widget/loading_widget.dart';
 
 class DetailPage extends StatefulWidget {
   final Bloc _bloc;

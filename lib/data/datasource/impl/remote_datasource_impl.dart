@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:itgro_test/data/datasource/remote_datasource.dart';
-import 'package:itgro_test/data/models/user_model.dart';
+import 'package:test_task_flutter/data/datasource/remote_datasource.dart';
+import 'package:test_task_flutter/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class RemoteDatasourceImpl implements RemoteDatasource{
