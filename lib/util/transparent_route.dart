@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class TransparentPageRoute<T> extends MaterialPageRoute<T> { // закомментировал строку "assert(opaque)" in MaterialPageRoute, чтобы включилась прозрачность
+class TransparentPageRoute extends PageRoute<void> {
   TransparentPageRoute({
-    @required builder,
+    @required this.builder,
     RouteSettings settings,
   })  : assert(builder != null),
-        super(builder: builder, settings: settings, fullscreenDialog: false);
+        super(settings: settings, fullscreenDialog: false);
+
+  final WidgetBuilder builder;
 
   @override
   bool get opaque => false;
@@ -18,4 +20,21 @@ class TransparentPageRoute<T> extends MaterialPageRoute<T> { // закоммен
 
   @override
   bool get maintainState => true;
+
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 350);
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
+    final result = builder(context);
+    return FadeTransition(
+      opacity: Tween<double>(begin: 0, end: 1).animate(animation),
+      child: Semantics(
+        scopesRoute: true,
+        explicitChildNodes: true,
+        child: result,
+      ),
+    );
+  }
 }
