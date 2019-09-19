@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TransparentPageRoute<T> extends MaterialPageRoute<T> { //assert(opaque) in MaterialPageRoute,
+class TransparentPageRoute<T> extends MaterialPageRoute<T> { // закомментировал строку "assert(opaque)" in MaterialPageRoute, чтобы включилась прозрачность
   TransparentPageRoute({
     @required builder,
     RouteSettings settings,
