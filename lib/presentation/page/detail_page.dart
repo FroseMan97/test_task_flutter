@@ -60,10 +60,13 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
         Container(
-          child: StreamBuilder<List<UserEntity>>(
+          child: StreamBuilder<bool>(
               stream: widget._bloc.getUsers,
               builder: (context, snapshot) {
-                List<UserEntity> list = widget._bloc.getCachedUsers;
+                List<UserEntity> list=[];
+                if(snapshot.hasData){
+                list = widget._bloc.getCachedUsers;
+                }
                 return Scaffold(
                   appBar: _buildAppBar(list.length),
                   backgroundColor: Colors.transparent,
@@ -81,6 +84,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   )),
                 );
+                
               }),
         ),
       ],
@@ -156,7 +160,7 @@ class _DetailPageState extends State<DetailPage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               int pageNumber = snapshot.data;
-              return Text('${pageNumber + 1} из ${totalSize}');
+              return Text('${pageNumber + 1} из $totalSize');
             } else {
               return Container();
             }

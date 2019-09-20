@@ -59,10 +59,10 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: StreamBuilder<List<UserEntity>>(
+        child: StreamBuilder<bool>(
           stream: _bloc.getUsers,
           builder: (context, snapshot) {
-            if (!_bloc.isCachedListEmpty()) {
+            if (snapshot.hasData) {
               List<UserEntity> list = _bloc.getCachedUsers;
               return ListView.separated(
                 controller: _scrollController,
